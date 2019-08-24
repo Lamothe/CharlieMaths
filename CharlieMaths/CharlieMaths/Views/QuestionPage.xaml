@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CharlieMaths.Views.QuestionPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ContentView Padding="20, 10, 10, 10" BackgroundColor="#2196F3">
+                <Label x:Name="labelLessonHeader" Text="Lesson" TextColor="White" FontSize="Large" />
+            </ContentView>
+            <ContentView Padding="20">
+                <Label x:Name="labelQuestionHeader" Text="Question X" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+            </ContentView>
+            <ContentView Padding="20">
+                <Label x:Name="labelQuestion" Text="Question" FontSize="Large" HorizontalOptions="Center" />
+            </ContentView>
+            <ContentView Padding="20" HorizontalOptions="Center" WidthRequest="50">
+                <Entry x:Name="entryAnswer" Keyboard="Numeric" FontSize="Large" HorizontalTextAlignment="Center" />
+            </ContentView>
+            <ContentView Padding="20">
+                <Label x:Name="labelResult" FontSize="Large" HorizontalOptions="Center"/>
+            </ContentView>
+            <ContentView Padding="20">
+                <Button x:Name="buttonNext" Text="Next Question" FontSize="Large" HorizontalOptions="Center" />
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
