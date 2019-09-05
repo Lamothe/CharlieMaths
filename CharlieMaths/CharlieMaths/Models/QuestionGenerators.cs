@@ -15,6 +15,16 @@ namespace CharlieMaths.Models
         protected Random RandomNumber = new Random();
 
         public abstract Question GetQuestion();
+
+        public int RandomInt(int max)
+        {
+            return RandomNumber.Next(max);
+        }
+
+        public bool RandomBool()
+        {
+            return RandomNumber.Next(2) == 0;
+        }
     }
 
     public class AdditionQuestionGenerator : QuestionGenerator
@@ -67,12 +77,7 @@ namespace CharlieMaths.Models
 
     public class MultiplicationQuestionGenerator : QuestionGenerator
     {
-        private int MaximumValue { get; set; }
-
-        public MultiplicationQuestionGenerator(int maximumValue)
-        {
-            MaximumValue = maximumValue;
-        }
+        public int MaximumValue { get; set; } = 5;
 
         public override Question GetQuestion()
         {
@@ -89,12 +94,7 @@ namespace CharlieMaths.Models
 
     public class DivisionQuestionGenerator : QuestionGenerator
     {
-        private int MaximumValue { get; set; }
-
-        public DivisionQuestionGenerator(int maximumValue)
-        {
-            MaximumValue = maximumValue;
-        }
+        public int MaximumValue { get; set; } = 5;
 
         public override Question GetQuestion()
         {
@@ -109,17 +109,32 @@ namespace CharlieMaths.Models
         }
     }
 
-    public class DivisionQuestionGenerator2 : QuestionGenerator
+    public class BracketsQuestionGenerator : QuestionGenerator
     {
+        public int MaximumValue { get; set; } = 5;
+
+        public bool SwitchOperators { get; set; }
+
+        public bool SwitchPosition { get; set; }
+
         public override Question GetQuestion()
         {
-            var a = RandomNumber.Next(10);
-            var b = RandomNumber.Next(9) + 1;
+            var a = RandomInt(MaximumValue);
+            var b = RandomInt(MaximumValue);
+            var c = RandomInt(MaximumValue);
+            var d = SwitchOperators ? RandomBool() : true;
+            var e = SwitchPosition ? RandomBool() : true;
+
+            var op = e ? "+" : "-";
 
             return new Question
             {
-                Text = $"{a * b} / {b} =",
-                Answer = a.ToString()
+                Text = d
+                    ? $"({a} {op} {b}) * {c} ="
+                    : $"{a} {op} ({b} * {c}) =",
+                Answer = d
+                    ? ((a + (e ? b : -b)) * c).ToString()
+                    : (a + ((e ? b : -b) * c)).ToString()
             };
         }
     }
